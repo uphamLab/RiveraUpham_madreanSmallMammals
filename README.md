@@ -1,14 +1,16 @@
 # Uncovering historical small mammal biodiversity among the Madrean Sky Islands
 ## Rivera, D.C. and Upham, N.S. (2026) _Journal of Mammalogy_
 
-1. Supplementary
-Figure Scripts
-Data Tables
-GIS-Layers.zip 685 Mb (unzips to 2.7 Gb)
+1. Tables_and_Figures
+2. Supplementary
+- Figure_Scripts
+- SD1-2_GIS-Layers.zip - 685 Mb (unzips to 2.7 Gb)
+- SD3-11_Data-Tables
 
-contains
-Supplemental Data 1-Polygons
-- each of the 54 mountains
-Supplemental Data 2-Rasters
-- each of the 54 mountains
-- Aster DEM (digital elevation model), used to interpolate elevations and calculate ruggedness
+
+SD1-2_GIS-Layers.zip contains
+- Supplemental Data 1-Polygons
+-- each of the 54 mountains
+- Supplemental Data 2-Rasters
+-- each of the 54 mountains
+-- Aster DEM (digital elevation model), used to interpolate elevations and calculate ruggedness
