@@ -7,7 +7,7 @@
 2. Supplementary
 	* Figure_Scripts
 	* SD1-2_GIS-Layers.zip - 685 Mb (unzips to 2.7 Gb)
-	* SD3-11_Data-Tables
+	* SD3-12_Data-Tables
 
 
 * SD1-2_GIS-Layers.zip contains
