@@ -2,26 +2,31 @@ library(ggplot2)
 library(dplyr)
 library(stringr)
 
-rodent <-read.csv("Supplemental Table 3- Rodentia Specimens.csv")
+#Read in data
+rodent <-read.csv("Supplementary_Data_SD5.csv")
 
-
+#Count the 10 most common species of rodent
 top_species <- rodent %>%
   count(species_mdd, sort = TRUE) %>%
   top_n(10, wt = n) %>%
   pull(species_mdd)
 
+#Filter the data to just the top 10 species
 rodent_top10 <- rodent %>%
   filter(species_mdd %in% top_species) %>%
   mutate(species_mdd = factor(species_mdd, levels = custom_order))  
 
+#Assign a color to each family
 custom_colors <- c("#4478a6", "#94cef2", "#AA865A")
 
+#Order species alphabetically within families
 custom_order <- c(
   "Microtus longicaudus", "Neotoma albigula", "Neotoma mexicana", "Peromyscus boylii",
   "Peromyscus sonoriensis", "Peromyscus melanotis", "Megascapheus bottae", "Megascapheus umbrinus",
   "Neotamias dorsalis", "Otospermophilus variegatus"
 )
 
+#Plot species in a bar chart
 ggplot(rodent_top10, aes(x = species_mdd, fill = family)) +
   geom_bar() +
   geom_text(

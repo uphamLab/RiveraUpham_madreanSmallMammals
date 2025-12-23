@@ -2,25 +2,31 @@ library(ggplot2)
 library(dplyr)
 library(stringr)
 
-bat <- read.csv("Supplemental Table 2- Chiroptera Specimens.csv")
+#Read in data
+bat <- read.csv("Supplementary_Data_SD3.csv")
 
+#Assign a color for each family
 custom_colors <- c("#4478a6", "#3c401e", "#a3afbb")
 
+#Count the 10 most common species of bat
 top_species_bat <- bat %>%
   count(species_mdd, sort = TRUE) %>%
   top_n(10, wt = n) %>%
   pull(species_mdd)
 
+#Filter the data to just the top 10 species (11 in this case, since two species are tied for 10th)
 bat_top10 <- bat %>%
   filter(species_mdd %in% top_species_bat) %>%
-  mutate(species_mdd = factor(species_mdd, levels = custom_order_bat))  
+  mutate(species_mdd = factor(species_mdd, levels = custom_order_bat))
 
+#Order species alphabetically within families
 custom_order_bat <- c(
   "Tadarida brasiliensis", "Leptonycteris yerbabuenae", "Antrozous pallidus",
   "Corynorhinus townsendii", "Eptesicus fuscus", "Lasiurus cinereus", "Myotis auriculus", "Myotis thysanodes", "Myotis velifer",
   "Myotis volans", "Parastrellus hesperus"
 )
 
+#Plot species in a bar chart
 ggplot(bat_top10, aes(x = species_mdd, fill = family)) +
   geom_bar() +
   geom_text(

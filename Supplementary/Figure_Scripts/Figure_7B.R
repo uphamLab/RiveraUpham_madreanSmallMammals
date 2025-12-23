@@ -1,11 +1,14 @@
 library(ggplot2)
 library(dbplyr)
 
-RBS_2025 <- read.csv("Supplemental Data 7- Specimen_Area_Matrix.csv")
+#Read in data
+RBS_2025 <- read.csv("Supplementary_Data_SD8.csv")
 
+#Remove mountains that have no specimens
 non_zero_mountains <- dplyr::filter(RBS_2025, Total_Specimens>=1)
 
-ggplot(non_zero_mountains, aes(x = Max_Elevation, y = TS_km, label = Mountain)) +
+#plot maximum elevation vs specimens-area ratio
+ggplot(non_zero_mountains, aes(x = Max_Elevation, y = All_Specimens_Georeferened_per_km, label = Mountain)) +
   geom_point(size = 4, color = "#4478a6") +
   geom_smooth(method = "lm", se = FALSE, color = "#94cef2") +
   geom_text(size = 3, nudge_y = -.09, nudge_x = 0, angle = 0) +  

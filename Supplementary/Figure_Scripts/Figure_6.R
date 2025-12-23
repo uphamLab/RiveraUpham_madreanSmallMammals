@@ -3,17 +3,18 @@ library(dplyr)
 library(tidyr)
 library(forcats)
 
-combined_data <- read.csv("Supplemental Table 5- Combined Specimens (filtered for year)")
+#Read in data
+combined_data <- read.csv("Supplementary_Data_SD6.csv")
 
-
+#Assign a color to each order
 order_colors <- c("Rodentia" = "#73DFFF", "Eulipotyphla" = "#E60000", "Chiroptera" = "#895A44")
 
-# Step 1: Count specimens per year per order
+#Count specimens per year per order
 yearly_counts <- combined_data %>%
   group_by(Order, year) %>%
   summarise(count = n(), .groups = "drop")
 
-# Step 2: Compute cumulative counts
+#Compute cumulative counts
 cumulative_data <- yearly_counts %>%
   arrange(Order, year) %>%
   group_by(Order) %>%
@@ -23,6 +24,7 @@ cumulative_data <- yearly_counts %>%
 cumulative_data <- cumulative_data %>%
   mutate(Order = fct_relevel(Order,  "Rodentia", "Chiroptera", "Eulipotyphla"))
 
+#Plot one line for each order
 ggplot(cumulative_data, aes(x = year, y = cumulative_count, color = Order)) +
   geom_line(linewidth = 2) +
   scale_x_continuous(breaks = seq(1875, 2025, by = 25), limits = c(1875, 2025)) +

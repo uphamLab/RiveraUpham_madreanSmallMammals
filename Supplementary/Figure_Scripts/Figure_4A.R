@@ -2,13 +2,21 @@ library(ggplot2)
 library(dplyr)
 library(stringr)
 
-rodent <-read.csv("Supplemental Table 3- Rodentia Specimens.csv")
+#Read in data
+rodent <-read.csv("Supplementary_Data_SD5.csv")
 
+#Order genera alphabetically within family
 custom_genus_order_rodent <- c("Baiomys", "Microtus", "Neotoma", "Onychomys", "Peromyscus", "Reithrodontomys", "Sigmodon", "Erethizon", "Megascapheus", "Thomomys", "Chaetodipus", "Dipodomys", "Perognathus", "Mus", "Rattus", "Ammospermophilus", "Cynomys", "Neotamias", "Otospermophilus", "Sciurus", "Tamiasciurus", "Xerospermophilus")
+
 rodent$genus_mdd <- factor(rodent$genus_mdd, levels = custom_genus_order_rodent)
+
 label_data_rodent <- rodent %>%
   count(genus_mdd, family)
+
+#Assign a color for each family
 custom_colors <- c("#4478a6", "#898c26", "#94cef2", "#3c401e", "#a3afbb",  "#AA865A")
+
+#Plot species in a bar chart
 ggplot(label_data_rodent, aes(x = genus_mdd, y = n, fill = family)) +
   geom_col() +
   geom_text(aes(label = n), 

@@ -1,12 +1,14 @@
 library(ggplot2)
 library(dbplyr)
 
+#Read in data
+RBS_2025 <- read.csv("Supplementary_Data_SD8.csv")
 
-RBS_2025 <- read.csv("Supplemental Data 7- Specimen_Area_Matrix.csv")
-
+#Remove mountains that have no specimens
 non_zero_mountains <- dplyr::filter(RBS_2025, Total_Specimens>=1)
 
-ggplot(non_zero_mountains, aes(x = Area, y = Total_Specimens, label = Mountain)) +
+#plot number of specimens against area. 
+ggplot(non_zero_mountains, aes(x = Area, y = All_Specimens_Georeferenced, label = Mountain)) +
   geom_point(size = 4, color = "#4478a6") +
   geom_smooth(method = "lm", se = FALSE, color = "#94cef2") +
   geom_text(size = 3, nudge_y = -.06, nudge_x = 0, angle = 0) +  

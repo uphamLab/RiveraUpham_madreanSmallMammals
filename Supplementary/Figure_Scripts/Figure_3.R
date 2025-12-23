@@ -2,13 +2,15 @@ library("zoo")
 library("ggplot2")
 library ("dplyr")
 
-Chiricahua <- read.csv("Supplemental Table 8- Individual_Mountain_Elevation - Chiricahua.csv")
-Peloncillo_South <- read.csv("Supplemental Table 8- Individual_Mountain_Elevation - Peloncillo South.csv")
-Rincon <- read.csv("Supplemental Table 8- Individual_Mountain_Elevation - Rincon.csv")
-Pinalenos <- read.csv("Supplemental Table 8- Individual_Mountain_Elevation - Pinalenos.csv")
-Patagonia <- read.csv("Supplemental Table 8- Individual_Mountain_Elevation - Patagonia.csv")
-Santa_Rita <- read.csv("Supplemental Table 8- Individual_Mountain_Elevation - Santa Rita.csv")
+#Read in data by exporting the following individual tabs in SD9 as .csv files
+Chiricahua <- read.csv("Supplementary_Data_SD9 - Chiricahua.csv")
+Peloncillo_South <- read.csv("Supplementary_Data_SD9 - Peloncillo South.csv")
+Rincon <- read.csv("Supplementary_Data_SD9 - Rincon.csv")
+Pinalenos <- read.csv("Supplementary_Data_SD9 - Pinalenos.csv")
+Patagonia <- read.csv("Supplementary_Data_SD9 - Patagonia.csv")
+Santa_Rita <- read.csv("Supplementary_Data_SD9 - Santa Rita.csv")
 
+#Smooth data to reduce the jaggedness of the lines in the graph
 Peloncillo_South_smooth <- Peloncillo_South %>%
   arrange(Value) %>%
   mutate(Area = rollmean(Area, k = 9, fill = NA, align = "center"))
@@ -33,8 +35,11 @@ Santa_Rita_smooth <- Santa_Rita %>%
   arrange(Value) %>%
   mutate(Area = rollmean(Area, k = 9, fill = NA, align = "center"))
 
+#Assign a color to each mountain
 colors <- c(  "#E84B4F", "#009E73", "#AA865A", "#0072B2", "#A98FBA", "#87CEEB")
 labels <- c("Rincon", "Peloncillo_South", "Chiricahuas", "Pinalenos", "Patagonia", "Santa_Rita")
+
+#Plot 6 lines on one graph
 combined_plot <- ggplot() +
   geom_line(data = Pinaleno_smooth, aes(x = Value, y = Area, color = "Pinalenos"), linewidth = 1.5) +
   geom_line(data = Chiricahua_smooth, aes(x = Value, y = Area, color = "Chiricahuas"), linewidth = 1.5) +

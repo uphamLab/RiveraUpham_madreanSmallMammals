@@ -2,13 +2,21 @@ library(ggplot2)
 library(dplyr)
 library(stringr)
 
-bat <- read.csv("Supplemental Table 2- Chiroptera Specimens.csv")
+#Read in data
+bat <- read.csv("Supplementary_Data_SD3.csv")
 
+#Order genera alphabetically within family
 custom_genus_order <- c("Eumops", "Nyctinomops", "Tadarida", "Mormoops", "Pteronotus", "Natalus", "Artibeus", "Choeronycteris", "Glossophaga", "Leptonycteris", "Macrotus", "Sturnira", "Antrozous", "Corynorhinus", "Eptesicus", "Idionycteris", "Lasionycteris", "Lasiurus", "Myotis", "Parastrellus")
+
 bat$genus_mdd <- factor(bat$genus_mdd, levels = custom_genus_order)
+
 label_data_bat <- bat %>%
   count(genus_mdd, family)
+
+#Assign a color for each family
 custom_colors <- c("#4478a6", "#898c26", "#94cef2", "#3c401e", "#a3afbb",  "#AA865A")
+
+#Plot species in a bar chart
 ggplot(label_data_bat, aes(x = genus_mdd, y = n, fill = family)) +
   geom_col() +
   geom_text(aes(label = n), 
