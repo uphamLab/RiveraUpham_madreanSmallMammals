@@ -1,6 +1,6 @@
 # Uncovering historical small mammal biodiversity among the Madrean Sky Islands
 ## Rivera, D.C. and Upham, N.S. (in review) _Journal of Mammalogy_
-## MS file [here](https://github.com/uphamLab/RiveraUpham_madreanSmallMammals/blob/main/Manuscript/RiveraUpham_JMAMM-2025-174.R1_Proof_hi.pdf)
+## MS file [here](https://github.com/uphamLab/RiveraUpham_madreanSmallMammals/blob/main/Manuscript/RiveraUpham_JMAMM-2025-174.R1_Proof_hi-v2.pdf)
 ## Zenodo mirror of repo: [![DOI](https://zenodo.org/badge/1041064427.svg)](https://doi.org/10.5281/zenodo.17101039)
 
 1. Tables_and_Figures
